@@ -1,0 +1,11 @@
+@import './base.css';
+:root {
+  --black: #1e2124;
+  --dark: #282b30;
+  --dark-gray: #36393e;
+  --gray: #424549;
+  --light-gray: #97A9B4;
+  --white: #ffffff;
+  --main: #7289da;
+  --green: #57f287;
+}
