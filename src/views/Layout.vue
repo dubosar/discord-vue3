@@ -1,6 +1,6 @@
 <script setup>
 import Header from '../components/Header.vue'
-import Sidebar from '../components/Sidebar.vue'
+import Sidebar from '../components/Sidebar2.vue'
 import Contacts from '../components/Contacts.vue'
 import Main from '../components/Main.vue'
 </script>
