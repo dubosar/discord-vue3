@@ -21,14 +21,14 @@ const myCustomLightTheme = {
   },
   dark: false,
   colors: {
-    black: "#1e2124",
-    dark: "#282b30",
-    'dark-gray': "#36393e",
-    gray: "#424549",
-    'light-gray': "#97A9B4",
+    black: "#202225",
+    dark: "#2f3136",
+    'dark-gray': "#36393f",
+    gray: "#42464d",
+    'light-gray': "#b9bbbe",
     white: "#ffffff",
-    main: "#7289da",
-    green: "#57f287",
+    main: "#5865f2",
+    green: "#3ba55d",
   }
 }
 const vuetify = createVuetify({

@@ -22,7 +22,7 @@ import Main from '../components/Main.vue'
       grid-template-areas:
          "h h h"
          "s c m";
-      grid-template-columns: 70px 250px auto;
+      grid-template-columns: 70px 240px auto;
       grid-template-rows: 25px auto;
       border-radius: 5px;
       overflow: hidden;

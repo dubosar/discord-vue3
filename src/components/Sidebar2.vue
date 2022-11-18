@@ -4,12 +4,12 @@
 
 <template>
   <div id="sidebar">
-    <div class="cell mb-2">
+    <div class="cell direct mb-2 active">
       <div class="wrap">
         <img src="src/assets/discord-icon.svg" alt="">
       </div>
     </div>
-    <v-divider class="mb-2" style="width: 40px" color="gray" thickness="2"></v-divider>
+    <v-divider class="mb-2" style="width: 35px" color="gray" thickness="2"></v-divider>
 
     <div class="cell mb-2">
       <div class="wrap">
@@ -27,12 +27,12 @@
       </div>
     </div>
 
-    <div class="cell mb-2">
+    <div class="cell system mb-2">
       <div class="wrap">
         <v-icon class="rotate">mdi-close</v-icon>
       </div>
     </div>
-    <div class="cell mb-2">
+    <div class="cell system mb-2">
       <div class="wrap">
         <v-icon>mdi-compass</v-icon>
       </div>
@@ -51,18 +51,68 @@
   flex-direction: column;
 }
 .cell{
-  border: 1px solid #fff;
-  width: 50px;
-  height: 50px;
+  width: 48px;
+  height: 48px;
+
+  &.direct{
+    .wrap {
+      background: var(--main);
+    }
+    img {
+      width: 30px;
+      height: 30px;
+    }
+  }
+  &.system{
+    .rotate{
+      rotate: 45deg;
+    }
+    .wrap {
+      background: var(--gray);
+      color: var(--green);
+    }
+    &.active, &:hover {
+      .wrap {
+        color: var(--white);
+        background: var(--green);
+      }
+    }
+  }
 
   .wrap {
     display: flex;
     height: 100%;
+    justify-content: center;
     align-items: center;
+    border-radius: 100%;
+    overflow: hidden;
     & > * {
       width: 100%;
-      border-radius: 100%;
     }
+  }
+
+  //&:hover {
+  //  .wrap {
+  //      border-radius: 15px;
+  //      transition: border-radius 0.1s;
+  //  }
+  //}
+  &.active, &:hover {
+    .wrap {
+      border-radius: 15px;
+      transition: border-radius 0.1s;
+    }
+      &:before {
+        content: '';
+        background: var(--white);
+        width: 4px;
+        height: 60%;
+        display: block;
+        top: 20%;
+        left: -10px;
+        position: absolute;
+        border-radius: 0 4px 4px 0;
+      }
   }
 
   //&.active {
