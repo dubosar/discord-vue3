@@ -1,16 +1,16 @@
 <script setup>
 import Header from '../components/Header.vue'
-import Sidebar from '../components/Sidebar2.vue'
-import Contacts from '../components/Contacts.vue'
-import Main from '../components/Main.vue'
+import Sidebar from '../components/Sidebar.vue'
+import SideArea from '../components/SideArea.vue'
+import MainArea from '../components/MainArea.vue'
 </script>
 
 <template>
   <div id="layout">
     <Header />
     <Sidebar />
-    <Contacts />
-    <Main />
+    <SideArea />
+    <MainArea />
   </div>
 </template>
 
@@ -21,7 +21,7 @@ import Main from '../components/Main.vue'
       display: grid;
       grid-template-areas:
          "h h h"
-         "s c m";
+         "s sa ma";
       grid-template-columns: 70px 240px auto;
       grid-template-rows: 25px auto;
       border-radius: 5px;
@@ -33,11 +33,11 @@ import Main from '../components/Main.vue'
       #sidebar{
          grid-area: s;
       }
-      #contacts{
-         grid-area: c;
+      #sideArea{
+         grid-area: sa;
       }
-      #main{
-         grid-area: m;
+      #mainArea{
+         grid-area: ma;
       }
    }
 </style>
