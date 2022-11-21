@@ -12,7 +12,7 @@ const channels = [
   <div id="sidebar">
     <div class="cell direct mb-2 active">
       <div class="wrap">
-        <img src="src/assets/discord-icon.svg" alt="">
+        <img src="../assets/images/discord-icon.svg" alt="">
       </div>
     </div>
     <v-divider class="mb-2" style="width: 35px" color="gray" thickness="2"></v-divider>

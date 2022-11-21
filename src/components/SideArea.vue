@@ -1,21 +1,10 @@
 <script setup>
-import { ref } from 'vue'
+import mockUsers from './mock-users'
+import {reactive, ref} from 'vue'
 
-const users = [
-  { id: 1, name: 'John Doe', img: 'https://i.pravatar.cc/150', active: true, },
-  { id: 2, name: 'Mike Brooke', img: 'https://i.pravatar.cc/250', active: false, },
-  { id: 3, name: 'Sasha Grey', img: 'https://i.pravatar.cc/350', active: true, },
-  { id: 4, name: 'Mugiwara Luffy', img: 'https://i.pravatar.cc/450', active: false, },
-  { id: 5, name: 'Tim Cook', img: 'https://i.pravatar.cc/550', active: true, },
-  { id: 6, name: 'Johny Sins', img: 'https://i.pravatar.cc/650', active: true, },
-  { id: 7, name: 'John Doe', img: 'https://i.pravatar.cc/151', active: true, },
-  { id: 8, name: 'Mike Brooke', img: 'https://i.pravatar.cc/251', active: false, },
-  { id: 9, name: 'Sasha Grey', img: 'https://i.pravatar.cc/351', active: true, },
-  { id: 10, name: 'Mugiwara Luffy', img: 'https://i.pravatar.cc/451', active: false, },
-  { id: 11, name: 'Tim Cook', img: 'https://i.pravatar.cc/551', active: true, },
-  { id: 12, name: 'Johny Sins', img: 'https://i.pravatar.cc/651', active: true, },
-]
+
 const selectedUser = ref(3)
+const users = reactive(mockUsers)
 </script>
 
 <template>
@@ -51,8 +40,8 @@ const selectedUser = ref(3)
           :class="user.id === selectedUser ? 'active' : ''"
         >
           <div class="d-flex align-center">
-            <v-badge dot :color="user.active ? 'green' : 'gray'" offset-x="10" offset-y="20" bordered>
-              <img :src="user.img" class="mr-3">
+            <v-badge dot :color="user.online ? 'green' : 'gray'" offset-x="10" offset-y="20" bordered>
+              <img :src="user.img" class="mr-3" :alt="user.name">
             </v-badge>
 
             <span class="ellipsis">{{ user.name }}</span>
@@ -102,6 +91,7 @@ const selectedUser = ref(3)
 }
 
 .top{
+  height: 45px;
   border-bottom: 1.5px solid var(--black);
   .button {
     cursor: pointer;
