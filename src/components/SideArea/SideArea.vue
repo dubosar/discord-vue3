@@ -1,10 +1,18 @@
 <script setup>
 import mockUsers from '../mock-users'
-import {reactive, ref} from 'vue'
+import {reactive, ref, onMounted, nextTick } from 'vue'
 import UserCard from '../UserCard'
 
 const selectedUser = ref(3)
 const users = reactive(mockUsers)
+const scrollArea = ref(null)
+let hasScroll = ref(false)
+
+onMounted(async () => {
+  await nextTick()
+  hasScroll = scrollArea.value.scrollHeight > scrollArea.value.clientHeight
+  console.log(hasScroll)
+})
 </script>
 
 <template>
@@ -15,7 +23,7 @@ const users = reactive(mockUsers)
       </div>
     </div>
 
-    <div class="pa-2 scroll-area">
+    <div class="pa-2 scroll-area" ref="scrollArea">
       <div class="tabs">
         <div class="tab active">
           <v-icon class="mr-2">mdi-account-multiple</v-icon>
@@ -65,19 +73,18 @@ const users = reactive(mockUsers)
 <style scoped lang="scss">
 #sideArea {
   height: 100%;
+  overflow: hidden;
   display: grid;
   grid-template-rows: 45px auto 50px;
   border-radius: 10px 0 0 0;
   box-sizing: border-box;
   background: var(--dark);
 }
-
 .scroll-area{
-  max-height: 600px;
-  overflow: hidden;
+  overflow-y: scroll;
   margin-right: 5px;
   &:hover{
-    margin-right: 0;
+    margin-right: 5px;
     overflow-y: auto;
   }
 }

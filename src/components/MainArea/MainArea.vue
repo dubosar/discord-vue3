@@ -1,17 +1,26 @@
 <script setup>
 import mockUsers from '../mock-users'
-import { ref, computed, reactive } from "vue";
+import { ref, computed, reactive, Transition } from "vue";
 import UserCard from '../UserCard'
 
 const users = reactive(mockUsers)
-const onlineUsers = computed(() => {
-  return users.filter(user => user.online)
+const filterButtons = reactive(['online', 'all', 'pending', 'blocked', ])
+const filter = ref('all')
+const searchText = ref('')
+
+const filteredUsers = computed(() => {
+  switch (filter.value) {
+    case 'online': return users.filter(user => user.online)
+    case 'all': return users
+    case 'pending': return users.filter(user => user.pending)
+    case 'blocked': return users.filter(user => user.blocked)
+  }
 })
 
-const searchText = ref('')
 const foundUsers = computed(() => {
-  return users.filter((user) =>
+  return filteredUsers.value.filter((user) =>
     user.name.toLowerCase().includes(searchText.value.toLowerCase()))
+
 })
 </script>
 
@@ -24,11 +33,16 @@ const foundUsers = computed(() => {
       </div>
       <v-divider vertical color="light-gray" class="mx-2"></v-divider>
       <div class="section">
-        <v-btn variant="tonal" size="x-small">Online</v-btn>
-        <v-btn variant="text" size="x-small">All</v-btn>
-        <v-btn variant="text" size="x-small">Pending</v-btn>
-        <v-btn variant="text" size="x-small">Blocked</v-btn>
-        <v-btn variant="flat" size="x-small" color="green">Add Friend</v-btn>
+        <v-btn
+          @click="filter = button"
+          v-for="button in filterButtons"
+          class="mr-2"
+          :variant="button === filter ? 'tonal' : 'text'"
+          size="x-small"
+        >
+          {{ button }}
+        </v-btn>
+        <v-btn class="mr-2" variant="flat" size="x-small" color="green">Add Friend</v-btn>
       </div>
       <v-spacer></v-spacer>
       <div class="section">
@@ -46,26 +60,32 @@ const foundUsers = computed(() => {
         </v-btn>
       </div>
     </div>
-    <div class="users py-3 px-6">
-      <v-text-field
-        @click:clear="searchText = ''"
-        v-model="searchText"
-        placeholder="Search"
-        clearable
-        variant="solo"
-        hide-details
-        density="compact"
-        single-line
-        append-inner-icon="mdi-magnify"
-      />
+    <div class="users py-3 pl-6 pr-2">
+      <div class="stable pr-6">
+        <v-text-field
+          @click:clear="searchText = ''"
+          v-model="searchText"
+          placeholder="Search"
+          clearable
+          variant="solo"
+          hide-details
+          density="compact"
+          single-line
+          append-inner-icon="mdi-magnify"
+        />
 
-      <div class="text-overline mt-3">online - {{ onlineUsers.length }}</div>
-      <UserCard
-        v-for="user in foundUsers"
-        :key="user.id"
-        :user="user"
-        :clearable="false"
-      />
+        <div class="online-label text-overline mt-3">online - {{ filteredUsers.length }}</div>
+      </div>
+      <Transition>
+        <div class="scroll-area pr-3">
+          <UserCard
+            v-for="user in foundUsers"
+            :key="user.id"
+            :user="user"
+            :clearable="false"
+          />
+        </div>
+      </Transition>
     </div>
   </div>
 </template>
@@ -73,21 +93,20 @@ const foundUsers = computed(() => {
 <style scoped lang="scss">
 #main {
   background: var(--dark-gray);
+  overflow: hidden;
   .top  {
     height: 45px;
     border-bottom: 1.5px solid var(--black);
   }
-  .user {
-    cursor: pointer;
-    color: var(--light-gray);
-    padding: 4px 4px;
-    margin: 2px 0;
-    border-radius: 4px;
-    font-weight: 400;
-    img{
-      width: 35px;
-      height: 35px;
-      border-radius: 100%;
+  .users {
+    height: 100%;
+    display: grid;
+    grid-template-rows: 90px auto;
+    .online-label{
+      border-bottom: 1px solid var(--gray)
+    }
+    .scroll-area {
+      overflow-y: scroll;
     }
   }
 }

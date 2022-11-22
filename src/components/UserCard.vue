@@ -7,9 +7,8 @@ defineProps({
 </script>
 
 <template>
-  <v-divider v-if="!clearable" color="gray"></v-divider>
   <div
-    class="user d-flex align-center justify-space-between align-center"
+    class="py-2 user d-flex align-center justify-space-between align-center"
     :class="user.id === selectedUser ? 'active' : ''"
   >
     <div class="d-flex align-center">
@@ -28,6 +27,8 @@ defineProps({
       </v-btn>
     </div>
   </div>
+  <v-divider v-if="!clearable" color="gray"></v-divider>
+
 </template>
 
 <style scoped lang="scss">

@@ -17,7 +17,7 @@ import MainArea from '../components/MainArea/MainArea.vue'
 <style scoped lang="scss">
    #layout {
      background: var(--black);
-     min-height: 700px;
+     height: 900px;
       display: grid;
       grid-template-areas:
          "h h h"
