@@ -1,6 +1,7 @@
 <script setup>
-import mockUsers from './mock-users'
+import mockUsers from '../mock-users'
 import { ref, computed, reactive } from "vue";
+import UserCard from '../UserCard'
 
 const users = reactive(mockUsers)
 const onlineUsers = computed(() => {
@@ -49,7 +50,7 @@ const foundUsers = computed(() => {
       <v-text-field
         @click:clear="searchText = ''"
         v-model="searchText"
-        placeholder="First name"
+        placeholder="Search"
         clearable
         variant="solo"
         hide-details
@@ -58,14 +59,13 @@ const foundUsers = computed(() => {
         append-inner-icon="mdi-magnify"
       />
 
-      <div class="text-overline">online - {{ onlineUsers.length }}</div>
-      <v-divider color="light-gray"></v-divider>
-      <div v-for="user in foundUsers" :key="user.id" class="user d-flex">
-        <v-badge dot :color="user.online ? 'green' : 'gray'" offset-x="10" offset-y="20" bordered>
-          <img :src="user.img" class="mr-3" :alt="user.name">
-        </v-badge>
-        <span class="ellipsis">{{ user.name }}</span>
-      </div>
+      <div class="text-overline mt-3">online - {{ onlineUsers.length }}</div>
+      <UserCard
+        v-for="user in foundUsers"
+        :key="user.id"
+        :user="user"
+        :clearable="false"
+      />
     </div>
   </div>
 </template>

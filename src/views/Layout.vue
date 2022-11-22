@@ -1,8 +1,8 @@
 <script setup>
 import Header from '../components/Header.vue'
 import Sidebar from '../components/Sidebar.vue'
-import SideArea from '../components/SideArea.vue'
-import MainArea from '../components/MainArea.vue'
+import SideArea from '../components/SideArea/SideArea.vue'
+import MainArea from '../components/MainArea/MainArea.vue'
 </script>
 
 <template>

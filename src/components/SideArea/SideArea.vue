@@ -1,7 +1,7 @@
 <script setup>
-import mockUsers from './mock-users'
+import mockUsers from '../mock-users'
 import {reactive, ref} from 'vue'
-
+import UserCard from '../UserCard'
 
 const selectedUser = ref(3)
 const users = reactive(mockUsers)
@@ -33,21 +33,13 @@ const users = reactive(mockUsers)
       </div>
 
       <div class="recent">
-        <div
+        <UserCard
           v-for="user in users"
           :key="user.id"
-          class="user d-flex align-center justify-space-between align-center"
-          :class="user.id === selectedUser ? 'active' : ''"
-        >
-          <div class="d-flex align-center">
-            <v-badge dot :color="user.online ? 'green' : 'gray'" offset-x="10" offset-y="20" bordered>
-              <img :src="user.img" class="mr-3" :alt="user.name">
-            </v-badge>
-
-            <span class="ellipsis">{{ user.name }}</span>
-          </div>
-          <v-icon class="close-icon" size="x-small">mdi-close</v-icon>
-        </div>
+          :user="user"
+          :clearable="true"
+          :selectedUser="selectedUser"
+        />
       </div>
     </div>
 
@@ -112,33 +104,6 @@ const users = reactive(mockUsers)
   &:hover, &.active{
     background: var(--gray);
     color: var(--white);
-  }
-}
-.recent {
-  .user {
-    cursor: pointer;
-    color: var(--light-gray);
-    padding: 4px 4px;
-    margin: 2px 0;
-    border-radius: 4px;
-    font-weight: 400;
-    &:hover, &.active{
-      background: var(--gray);
-      color: var(--white);
-    }
-    &:hover:not(.active){
-      .close-icon{
-        display: block;
-      }
-    }
-    img{
-      width: 35px;
-      height: 35px;
-      border-radius: 100%;
-    }
-    .close-icon{
-      display: none;
-    }
   }
 }
 
