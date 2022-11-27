@@ -1,18 +1,10 @@
 <script setup>
+import {reactive, ref } from 'vue'
 import mockUsers from '../mock-users'
-import {reactive, ref, onMounted, nextTick } from 'vue'
 import UserCard from '../UserCard'
-
 const selectedUser = ref(3)
 const users = reactive(mockUsers)
-const scrollArea = ref(null)
-let hasScroll = ref(false)
 
-onMounted(async () => {
-  await nextTick()
-  hasScroll = scrollArea.value.scrollHeight > scrollArea.value.clientHeight
-  console.log(hasScroll)
-})
 </script>
 
 <template>

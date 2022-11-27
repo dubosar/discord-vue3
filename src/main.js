@@ -1,12 +1,13 @@
-import { createApp } from 'vue'
+import {createApp} from 'vue'
 import App from './App.vue'
+import store from "@/store";
 
 import '@mdi/font/css/materialdesignicons.css'
 import './assets/main.css'
 
 // Vuetify
 import 'vuetify/styles'
-import { createVuetify } from 'vuetify'
+import {createVuetify} from 'vuetify'
 import * as components from 'vuetify/components'
 import * as directives from 'vuetify/directives'
 import {aliases, mdi} from "vuetify/iconsets/mdi";
@@ -43,5 +44,6 @@ const vuetify = createVuetify({
 })
 
 createApp(App)
-    .use(vuetify)
-    .mount('#app')
+  .use(vuetify)
+  .use(store)
+  .mount('#app')
