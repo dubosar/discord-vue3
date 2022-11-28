@@ -7,7 +7,7 @@ defineProps({
 </script>
 
 <template>
-  <div
+  <li
     class="py-2 user d-flex align-center justify-space-between align-center"
     :class="user.id === selectedUser ? 'active' : ''"
   >
@@ -26,9 +26,7 @@ defineProps({
         <v-icon>mdi-dots-vertical</v-icon>
       </v-btn>
     </div>
-  </div>
-  <v-divider v-if="!clearable" color="gray"></v-divider>
-
+  </li>
 </template>
 
 <style scoped lang="scss">

@@ -38,18 +38,28 @@ const foundUsers = computed(() => {
 
       <div class="online-label text-overline mt-3">online - {{ filteredUsers.length }}</div>
     </div>
-    <div class="scroll-area pr-3">
+    <TransitionGroup class="scroll-area pr-3" name="list" tag="ul">
       <UserCard
         v-for="user in foundUsers"
         :key="user.id"
         :user="user"
         :clearable="false"
       />
-    </div>
+    </TransitionGroup>
   </div>
 </template>
 
 <style scoped lang="scss">
+.list-enter-active,
+.list-leave-active {
+  transition: all 0.2s ease;
+}
+.list-enter-from,
+.list-leave-to {
+  opacity: 0;
+  transform: translatey(-30px);
+}
+
 .users {
   height: 100%;
   display: grid;
