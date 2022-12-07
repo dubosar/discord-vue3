@@ -1,17 +1,21 @@
 <script setup>
-import {computed, reactive, ref} from "vue";
-import mockUsers from '../mock-users'
+import {computed, ref, onMounted} from "vue";
+import {useUsersStore} from "@/store/UsersStore.js";
+let users = useUsersStore();
 import UserCard from '../UserCard'
 const props = defineProps(['pickedFilter'])
-const users = reactive(mockUsers)
+
+onMounted (() => {
+  users.getAllUsers()
+})
 
 const searchText = ref('')
 const filteredUsers = computed(() => {
   switch (props.pickedFilter) {
-    case 'online': return users.filter(user => user.online)
-    case 'all': return users
-    case 'pending': return users.filter(user => user.pending)
-    case 'blocked': return users.filter(user => user.blocked)
+    case 'online': return users.friends.filter(user => user.online)
+    case 'all': return users.friends
+    case 'pending': return users.friends.filter(user => user.pending)
+    case 'blocked': return users.friends.filter(user => user.blocked)
   }
 })
 
@@ -19,6 +23,7 @@ const foundUsers = computed(() => {
   return filteredUsers.value.filter((user) =>
     user.name.toLowerCase().includes(searchText.value.toLowerCase()))
 })
+
 </script>
 
 <template>

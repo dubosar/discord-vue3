@@ -1,9 +1,11 @@
 <script setup>
-import {reactive, ref } from 'vue'
-import mockUsers from '../mock-users'
+import {onMounted, ref} from 'vue'
 import UserCard from '../UserCard'
 const selectedUser = ref(3)
-const users = reactive(mockUsers)
+
+import {useUsersStore} from "@/store/UsersStore.js";
+let users = useUsersStore();
+
 
 </script>
 
@@ -34,7 +36,7 @@ const users = reactive(mockUsers)
 
       <div class="recent">
         <UserCard
-          v-for="user in users"
+          v-for="user in users.friends"
           :key="user.id"
           :user="user"
           :clearable="true"
